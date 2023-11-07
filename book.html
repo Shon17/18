@@ -50,10 +50,10 @@ li a.active {
     
     <p>Сортировать по цене: <a href="#" id="sortByPriceAsc">Цена ↑</a> | <a href="#" id="sortByPriceDesc">Цена ↓</a></p>
     <ul id="bookList">
-        <li data-price="30">Книга 1 - $30</li>
-        <li data-price="20">Книга 2 - $20</li>
-        <li data-price="40">Книга 3 - $40</li>
-        <li data-price="15">Книга 4 - $15</li>
+        <li data-price="30">Книга 1 - $30</li> <br>
+        <li data-price="20">Книга 2 - $20</li><br>
+        <li data-price="40">Книга 3 - $40</li><br>
+        <li data-price="15">Книга 4 - $15</li><br>
         <li data-price="25">Книга 5 - $25</li>
     </ul>
 
@@ -62,10 +62,10 @@ li a.active {
 const sortByPriceAscLink = document.getElementById('sortByPriceAsc');
 const sortByPriceDescLink = document.getElementById('sortByPriceDesc');
 
-// По умолчанию не сортировать
+
 let currentSort = 'none';
 
-// Функция для сортировки
+
 function sortBooks(sortOrder) {
     const books = Array.from(bookList.children);
     books.sort((a, b) => {
@@ -77,20 +77,20 @@ function sortBooks(sortOrder) {
         } else if (sortOrder === 'desc') {
             return priceB - priceA;
         } else {
-            return 0; // Не сортировать
+            return 0; 
         }
     });
 
     books.forEach(book => bookList.appendChild(book));
 }
 
-// Обработчики событий для сортировки
+
 sortByPriceAscLink.addEventListener('click', function (event) {
     event.preventDefault();
     currentSort = 'asc';
     sortBooks(currentSort);
 
-    // Подсветить ссылку
+   
     sortByPriceAscLink.style.color = 'red';
     sortByPriceDescLink.style.color = 'blue';
 });
@@ -100,7 +100,7 @@ sortByPriceDescLink.addEventListener('click', function (event) {
     currentSort = 'desc';
     sortBooks(currentSort);
 
-    // Подсветить ссылку
+   
     sortByPriceAscLink.style.color = 'blue';
     sortByPriceDescLink.style.color = 'red';
 });
