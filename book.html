@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжный интернет-магазин</title>
+</head>
+<body>
+    <h1>Книжный интернет-магазин</h1>
+    <p>Сортировать по цене: <a href="#" id="sortByPriceAsc">Цена ↑</a> | <a href="#" id="sortByPriceDesc">Цена ↓</a></p>
+    <ul id="bookList">
+        <li data-price="30">Книга 1 - $30</li>
+        <li data-price="20">Книга 2 - $20</li>
+        <li data-price="40">Книга 3 - $40</li>
+        <li data-price="15">Книга 4 - $15</li>
+        <li data-price="25">Книга 5 - $25</li>
+    </ul>
+
+    <script>
+        const bookList = document.getElementById('bookList');
+const sortByPriceAscLink = document.getElementById('sortByPriceAsc');
+const sortByPriceDescLink = document.getElementById('sortByPriceDesc');
+
+// По умолчанию не сортировать
+let currentSort = 'none';
+
+// Функция для сортировки
+function sortBooks(sortOrder) {
+    const books = Array.from(bookList.children);
+    books.sort((a, b) => {
+        const priceA = parseFloat(a.getAttribute('data-price'));
+        const priceB = parseFloat(b.getAttribute('data-price'));
+
+        if (sortOrder === 'asc') {
+            return priceA - priceB;
+        } else if (sortOrder === 'desc') {
+            return priceB - priceA;
+        } else {
+            return 0; // Не сортировать
+        }
+    });
+
+    books.forEach(book => bookList.appendChild(book));
+}
+
+// Обработчики событий для сортировки
+sortByPriceAscLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    currentSort = 'asc';
+    sortBooks(currentSort);
+
+    // Подсветить ссылку
+    sortByPriceAscLink.style.color = 'red';
+    sortByPriceDescLink.style.color = 'blue';
+});
+
+sortByPriceDescLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    currentSort = 'desc';
+    sortBooks(currentSort);
+
+    // Подсветить ссылку
+    sortByPriceAscLink.style.color = 'blue';
+    sortByPriceDescLink.style.color = 'red';
+});
+
+    </script>
+    
+</body>
+</html>
